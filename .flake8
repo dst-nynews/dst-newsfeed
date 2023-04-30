@@ -1,0 +1,7 @@
+[flake8]
+ignore = W503
+exclude = 
+    docs/conf.py,
+    */arkiv/*,
+    */tests/*
+max-line-length = 120
