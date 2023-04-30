@@ -1,8 +1,8 @@
-# DataScientest NY News - Feed
+# DataScientest News Feed
 
-> Repo d'un use case du projet centré sur l'API Times Wire du NY Times
+> Repo d'un cas d'usage du projet centré sur l'API `Times Wire` du NY Times
 
-- [DataScientest NY News - Feed](#datascientest-ny-news---feed)
+- [DataScientest News Feed](#datascientest-news-feed)
   - [Objectifs](#objectifs)
     - [Architecture](#architecture)
     - [Structure](#structure)
