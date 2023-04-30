@@ -2,7 +2,42 @@
 
 > Repo d'un use case du projet centré sur l'API Times Wire du NY Times
 
+- [DataScientest NY News - Feed](#datascientest-ny-news---feed)
+  - [Objectifs](#objectifs)
+    - [Architecture](#architecture)
+    - [Structure](#structure)
+    - [Fonctionnalités](#fonctionnalités)
+      - [1. Data Analytics](#1-data-analytics)
+      - [2. Web Dev](#2-web-dev)
+      - [3. DataOps](#3-dataops)
+      - [4. DevOps](#4-devops)
+  - [Pour démarrer le projet](#pour-démarrer-le-projet)
+
 ## Objectifs
+
+### Architecture
+
+Exemples d'architecture visé (si on atteint l'étape d'implantation dans GCP):
+
+  ![Batch ETL Pipeline](assets/diagrams/batch_etl_pipeline-2023_04_29.png)
+
+  ![Data Analaytics Pipeline](assets/diagrams/data_analytics_pipeline-2023_04_29.png)
+
+### Structure
+
+Les éléments principaux de ce repo sont organisés par logique fonctionnelle:
+
+  - Data Pipeline:
+    - `extract`
+    - `transform`
+    - `load`
+    - `storage`
+  - Web App:
+    - `backend`
+    - `frontend`
+  - DataOps:
+    - `orchestration`
+
 ### Fonctionnalités
 #### 1. Data Analytics
 
@@ -39,29 +74,6 @@
     - [ ] automatisant le dépoiement des micro-services du projet:
     - [ ] containeriser les composants du projet (-> Docker/Kubernetes),
     - [ ] adapter le projet dans une architecture IaC (-> Terraform),
-
-### Architecture
-
-Exemples d'architecture visé (si on atteint l'étape d'implantation dans GCP):
-
-  ![Batch ETL Pipeline](assets/diagrams/batch_etl_pipeline-2023_04_29.png)
-
-  ![Data Analaytics Pipeline](assets/diagrams/data_analytics_pipeline-2023_04_29.png)
-
-### Structure
-
-Les éléments principaux de ce repo sont organisés par logique fonctionnelle:
-
-  - Data Pipeline:
-    - `extract`
-    - `transform`
-    - `load`
-    - `storage`
-  - Web App:
-    - `backend`
-    - `frontend`
-  - DataOps:
-    - `orchestration`
 
 ## Pour démarrer le projet
 
