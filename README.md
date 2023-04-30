@@ -71,18 +71,20 @@ Ce projet collecte des données à partir de l'[API Times Wire](https://develope
 Vous pouvez récupérer la collection de tests des endpoints du portail développeur du NY Times:  
 
   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/13243200-ea02716e-cca8-4805-a312-cace9d88be63?action=collection%2Ffork&collection-url=entityId%3D13243200-ea02716e-cca8-4805-a312-cace9d88be63%26entityType%3Dcollection%26workspaceId%3Dcd31eedb-d71b-4744-b38a-441885918ed3)
+
 ### Structure
 
 Les éléments principaux de ce repo sont organisés par logique fonctionnelle:
 
   - Data Pipeline:
-    - `extract`
-    - `transform`
-    - `load`
-    - `storage`
+    - `etl`
+      - `extract`
+      - `transform`
+      - `load`
   - Web App:
-    - `backend`
-    - `frontend`
+    - `api`
+      - `backend`
+      - `frontend`
   - DataOps:
     - `orchestration`
 
