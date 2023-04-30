@@ -22,9 +22,9 @@ from urllib.parse import urljoin
 import requests
 
 
-class ExtractApiNewsWire:
+class ExtractNewsWire:
     def __init__(self, repo_path: str | None) -> None:
-        """Instanciate a connection to fetch data from an API of the NY Times.
+        """Instanciate a connection to fetch data from the API Times Newswire of the NY Times.
 
         Args:
             repo_path (str | None): Path to storage directory.
