@@ -18,11 +18,12 @@
 ## Objectifs
 
 ### Fonctionnalités
+
 #### 1. Data Analytics
 
 - [ ] Construire un pipeline ETL de traitement des données:
   - [ ] capable de les traiter par batch,
-  - [ ] extraites de l'API Times Wire
+  - [X] extraites de l'API Times Wire
     - [ ] vers une solution de stockage des données bruts,
   - [ ] transfomées pour être utilisable dans notre cas d'usage,
   - [ ] renvoyées vers une base de données
