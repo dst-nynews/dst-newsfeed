@@ -7,7 +7,8 @@ readme = "README.md"
 packages = [{include = "dst_newsfeed"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8.14,!=3.9.7"
+
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1"
@@ -20,6 +21,13 @@ mypy = "^0.991"
 pytest = "^7"
 pytest-cov = "^4"
 safety = "^2"
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^6.2.0"
+myst-parser = "^1.0.0"
+
+[tool.poetry.group.config.dependencies]
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.data.dependencies]
@@ -36,22 +44,13 @@ requests = "^2.29.0"
 fastapi = "^0.95.1"
 uvicorn = {extras = ["standard"], version = "^0.22.0"}
 
-
 [tool.poetry.group.frontend.dependencies]
 streamlit = "^1.22.0"
-
-
-[tool.poetry.group.config.dependencies]
-python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.dataops.dependencies]
 schedule = "^1.2.0"
 
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "^6.2.0"
-myst-parser = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -4,39 +4,18 @@
 
 - [DataScientest News Feed](#datascientest-news-feed)
   - [Objectifs](#objectifs)
-    - [Architecture](#architecture)
-    - [Structure](#structure)
     - [Fonctionnalités](#fonctionnalités)
       - [1. Data Analytics](#1-data-analytics)
       - [2. Web Dev](#2-web-dev)
       - [3. DataOps](#3-dataops)
       - [4. DevOps](#4-devops)
+    - [Architecture](#architecture)
+  - [Documentation](#documentation)
+    - [Analyse exploratoire](#analyse-exploratoire)
+    - [Structure](#structure)
   - [Pour démarrer le projet](#pour-démarrer-le-projet)
 
 ## Objectifs
-
-### Architecture
-
-Exemples d'architecture visé (si on atteint l'étape d'implantation dans GCP):
-
-  ![Batch ETL Pipeline](assets/diagrams/batch_etl_pipeline-2023_04_29.png)
-
-  ![Data Analaytics Pipeline](assets/diagrams/data_analytics_pipeline-2023_04_29.png)
-
-### Structure
-
-Les éléments principaux de ce repo sont organisés par logique fonctionnelle:
-
-  - Data Pipeline:
-    - `extract`
-    - `transform`
-    - `load`
-    - `storage`
-  - Web App:
-    - `backend`
-    - `frontend`
-  - DataOps:
-    - `orchestration`
 
 ### Fonctionnalités
 #### 1. Data Analytics
@@ -74,6 +53,40 @@ Les éléments principaux de ce repo sont organisés par logique fonctionnelle:
     - [ ] automatisant le dépoiement des micro-services du projet:
     - [ ] containeriser les composants du projet (-> Docker/Kubernetes),
     - [ ] adapter le projet dans une architecture IaC (-> Terraform),
+
+### Architecture
+
+Exemples d'architecture visé (si on atteint l'étape d'implantation dans GCP):
+
+  ![Batch ETL Pipeline](assets/diagrams/batch_etl_pipeline-2023_04_29.png)
+
+  ![Data Analaytics Pipeline](assets/diagrams/data_analytics_pipeline-2023_04_29.png)
+
+## Documentation
+
+### Analyse exploratoire
+
+Ce projet collecte des données à partir de l'[API Times Wire](https://developer.nytimes.com/docs/timeswire-product/1/overview) du NY Times.
+
+Vous pouvez récupérer la collection de tests des endpoints du portail développeur du NY Times:  
+
+  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/13243200-ea02716e-cca8-4805-a312-cace9d88be63?action=collection%2Ffork&collection-url=entityId%3D13243200-ea02716e-cca8-4805-a312-cace9d88be63%26entityType%3Dcollection%26workspaceId%3Dcd31eedb-d71b-4744-b38a-441885918ed3)
+
+### Structure
+
+Les éléments principaux de ce repo sont organisés par logique fonctionnelle:
+
+  - Data Pipeline:
+    - `etl`
+      - `extract`
+      - `transform`
+      - `load`
+  - Web App:
+    - `api`
+      - `backend`
+      - `frontend`
+  - DataOps:
+    - `orchestration`
 
 ## Pour démarrer le projet
 
