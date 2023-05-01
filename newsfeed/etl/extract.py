@@ -2,132 +2,121 @@
 
 The Times Newswire API provides an up-to-the-minute stream of published articles.
 ref: https://developer.nytimes.com/docs/timeswire-product/1/overview
-
-Args:
-    apikey (str): Credentials.
-    endpoint (str): Endpoint to call.
-    source (str | None): Filter results, in [all, nyt, inyt].
-    section (str | None): Filter results, in [arts, business, ...].
-
-Returns:
-    sections (dict[str, str]): List of Sections (length of result: +- 50).
-    articles (dict[str, str]): List of Articles (length of result: 500), from the most recently published.
 """
 
 import json
 import os
 from datetime import datetime
-from urllib.parse import urljoin
+from typing import Dict, Optional
 
 import requests
 
 
 class ExtractNewsWire:
-    def __init__(self, repo_path: str | None) -> None:
-        """Instanciate a connection to fetch data from the API Times Newswire of the NY Times.
+    """Instanciate a connection to fetch data from the API Times Newswire of the NY Times.
 
-        Args:
-            repo_path (str | None): Path to storage directory.
-        """
+    Attributes:
+        API_KEY (str): Credentials required to access the API.
+        URL_BASE (str): Path to the API.
+        URL_CONTENT (str): Path to an endpoint.
+        URL_SECTION (str): Path to an endpoint.
+        STORAGE_PATH (str): Path to the storage directory.
+        section_list (Dict[str, str]): All possible sections for the content.
+    """
 
-        # Set paths and credentials
+    def __init__(self, storage_path: Optional[str] = None) -> None:
         self.API_KEY = os.environ["NY_API_KEY"]
-        self.BASE_URL = os.getenv("BASE_URL", "https://api.nytimes.com/")
-        self.repo_path = repo_path
-        # data_source = os.environ.get("DATA_SOURCE")  # if a default value is ok
-        # data_source = os.environ["DATA_SOURCE"]      # to fail when the conf is missing
+        self.URL_BASE = os.getenv("URL_BASE", "https://api.nytimes.com")
+        self.URL_CONTENT = self.URL_BASE + "/svc/news/v3/content"
+        self.URL_SECTION = self.URL_CONTENT + "/section-list.json"
+        self.STORAGE_PATH = (
+            storage_path if storage_path is not None else "../../assets/data/raw/"
+        )
+        self.section_list = self.fetch_section_list()
 
-    def get_data(
-        self, endpoint: str | None, source: str | None, section: str | None
-    ) -> dict[str, str]:
+    def _fetch_data(self, url: str) -> Dict[str, str]:
         """GET request to an endpoint of the API.
 
         Args:
-            endpoint (str): Endpoint to call.
-            source (str | None): Filter results, in [all, nyt, inyt].
-            section (str | None): Filter results, in [arts, business, ...].
+            url (str): Url path to the endpoint, including path parameters.
 
         Returns:
-            dict[str, str]: Response as a JSON.
+            Dict[str, str]: Response as a JSON.
         """
 
-        # url_path_section_list = "/svc/news/v3/content/section-list.json"
-        # url_path_content = f"/svc/news/v3/content/{source}/{section}.json"
-        url_path = (
-            "/svc/news/v3/content/section-list.json"
-            if endpoint
-            else f"/svc/news/v3/content/{source}/{section}.json"
-        )
-
-        url = urljoin(self.BASE_URL, url_path)
         params = {"api-key": self.API_KEY}
-
         response = requests.get(url, params=params)
         # print(response.status_code)
-
         return response.json()
 
-    def save_data(
+    def fetch_articles(
         self,
-        endpoint: str | None,
-        source: str | None,
-        section: str | None,
-        data: dict[str, str],
-    ) -> None:
-        """Save response in a JSON file.
+        source: str = "all",
+        section: str = "all",
+    ) -> Dict[str, str]:
+        """GET request to an endpoint of the API.
 
         Args:
-            endpoint (str): Endpoint to call.
-            source (str | None): Filter results, in [all, nyt, inyt].
-            section (str | None): Filter results, in [arts, business, ...].
-            data (dict[str, str]): Response as a JSON.
+            source (str, optional): Filter results from [all, nyt, inyt]. Defaults to "all".
+            section (str, optional): Filter results from [arts, business, ...]. Defaults to "all".
+
+        Returns:
+            Dict[str, str]: Response as a JSON.
         """
 
-        _now = datetime.now()
-        _timestamp = _now.strftime("%y_%m_%d-%H_%M_%S")
-        filename = (
-            f"newswire-{_timestamp}"
-            + (f"-{endpoint}" if endpoint else "")
-            + (f"-{source}" if source else "")
-            + (f"-{section}" if section else "")
-            + ".json"
-        )
+        url = self.URL_CONTENT + f"/{source}/{section}.json"
+        return self._fetch_data(url)
 
-        if self.repo_path:
-            filepath = self.repo_path + filename
-        else:
-            filepath = f"../../assets/data/raw/{filename}"
+    def fetch_section_list(self) -> Dict[str, str]:
+        """GET request to an endpoint of the API.
 
-        with open(filepath, "w") as file:
+        Returns:
+            Dict[str, str]: Response as a JSON.
+        """
+
+        response = self._fetch_data(self.URL_SECTION)
+        return response
+
+    def _save_data(
+        self,
+        data: Dict[str, str],
+        file_name: str,
+    ) -> None:
+        """Save fetched data in a new file located in the storage directory.
+
+        Args:
+            data (Dict[str, str]): Data fetched from the request to the API.
+            file_name (str): Filename for the data saved.
+        """
+
+        file_path = self.STORAGE_PATH + file_name
+        with open(file_path, "w") as file:
             json.dump(data, file)
-        # return data, filename
 
+    def save_articles(
+        self,
+        data: Dict[str, str],
+        source: str = "all",
+        section: str = "all",
+    ) -> None:
+        """Save fetched data in a new file located in the storage directory.
 
-# if __name__ == "__main__":
-#     # Fetch articles (params: endpoint, period, repo_path).
+        Args:
+            data (Dict[str, str]): Data fetched from the request to the API.
+            source (str, optional): Filter results from [all, nyt, inyt]. Defaults to "all".
+            section (str, optional): Filter results from [arts, business, ...]. Defaults to "all".
+        """
 
-#     import sys
+        _timestamp = datetime.now().strftime("%y_%m_%d-%H_%M_%S")
+        file_name = f"newswire-{_timestamp}-{source}_{section}.json"
+        return self._save_data(data, file_name)
 
-#     endpoint = sys.argv[1]
-#     period = int(sys.argv[2])
+    def save_section_list(self, data: Dict[str, str]) -> None:
+        """Save fetched data in a new file located in the storage directory.
 
-#     try:
-#         api_most_popular = ApiMostPopular(repo_path=sys.argv[3])
-#     except IndexError:
-#         api_most_popular = ApiMostPopular()
+        Args:
+            data (Dict[str, str]): Data fetched from the request to the API.
+        """
 
-#     query = api_most_popular.get_data(endpoint, period)
-
-#     if query:
-#         raw_data_most_popular = api_most_popular.save_data(query, endpoint, period)
-#         print("\nArticles récupérés.\n")
-#         to_treat = raw_data_most_popular[0]
-#         name = raw_data_most_popular[1]
-
-#     # file = "../data/raw_data/most_popular/most_popular_emailed_1d_4_25.json"
-#     # to_treat = api_most_popular.import_json(file)
-#     # name = api_most_popular.file_name(file)
-#     print(name)
-#     to_stock = api_most_popular.clean_data(to_treat, name)
-#     print(to_stock)
-#     api_most_popular.save_clean_data(to_stock, endpoint, period)
+        file_name = "newswire-sections.json"
+        return self._save_data(data, file_name)
