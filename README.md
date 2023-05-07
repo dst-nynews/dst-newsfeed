@@ -1,5 +1,8 @@
 # DataScientest News Feed
 
+<!-- ![NY Times API black logo](https://developer.nytimes.com/files/poweredby_nytimes_150c.png?v=1583354208341)  -->
+![NY Times API white logo](https://developer.nytimes.com/files/poweredby_nytimes_150a.png?v=1583354208339) 
+
 > Repo d'un cas d'usage du projet centré sur l'API `Times Wire` du NY Times
 
 - [DataScientest News Feed](#datascientest-news-feed)
@@ -12,6 +15,7 @@
     - [Architecture](#architecture)
   - [Documentation](#documentation)
     - [Analyse exploratoire](#analyse-exploratoire)
+    - [Exemples de repos GitHub](#exemples-de-repos-github)
     - [Structure](#structure)
   - [Pour démarrer le projet](#pour-démarrer-le-projet)
 
@@ -72,6 +76,15 @@ Ce projet collecte des données à partir de l'[API Times Wire](https://develope
 Vous pouvez récupérer la collection de tests des endpoints du portail développeur du NY Times:  
 
   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/13243200-ea02716e-cca8-4805-a312-cace9d88be63?action=collection%2Ffork&collection-url=entityId%3D13243200-ea02716e-cca8-4805-a312-cace9d88be63%26entityType%3Dcollection%26workspaceId%3Dcd31eedb-d71b-4744-b38a-441885918ed3)
+
+### Exemples de repos GitHub
+
+Ces repos GitHub ont de bonnes idées dont on peut s'inspirer pour la structure et le code:
+
+  - [pynytimes](https://github.com/michadenheijer/pynytimes)  # extraction
+  - [DQMonstersDB-API](https://github.com/cmsato09/DQMonstersDB-API)  # backend
+  - [DQMonstersDB-streamlit](https://github.com/cmsato09/DQMonstersDB-streamlit)  # frontend
+  - [DataEngineeringProject](https://github.com/damklis/DataEngineeringProject)  # orchestration
 
 ### Structure
 
