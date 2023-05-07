@@ -4,9 +4,9 @@ The Times Newswire API provides an up-to-the-minute stream of published articles
 ref: https://developer.nytimes.com/docs/timeswire-product/1/overview
 """
 
+import datetime as dt
 import json
 import os
-from datetime import date, datetime
 
 import requests
 
@@ -157,7 +157,7 @@ class MostPopular(ApiNyTimes):
         return self._get_data(url)
 
     def save_content(self, data: dict[str, str], endpoint: str, period: int) -> None:
-        _today = date.today()
+        _today = dt.date.today()
         filename = f"most_popular_{endpoint}_{period}d_{_today.month}_{_today.day}.json"
         return self._save_data(data=data, filename=filename)
 
@@ -219,7 +219,7 @@ class TimesWire(ApiNyTimes):
             section (str, optional): Filter results from [arts, business, ...]. Defaults to "all".
         """
 
-        _timestamp = datetime.now().strftime("%y_%m_%d-%H_%M_%S")
+        _timestamp = dt.datetime.now().strftime("%y_%m_%d-%H_%M_%S")
         filename = f"newswire-{_timestamp}-{source}_{section}.json"
         return self._save_data(data, filename)
 
