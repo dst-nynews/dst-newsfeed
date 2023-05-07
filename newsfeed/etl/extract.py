@@ -78,7 +78,7 @@ class ApiNyTimes:
     def _get_data(
         self,
         url: str,
-        payload: dict[str, str] | None,
+        payload: dict[str, str] | None = None,
     ) -> dict[str, str]:
         """GET request to an endpoint of the API.
 
