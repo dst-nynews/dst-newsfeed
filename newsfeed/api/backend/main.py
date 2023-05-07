@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 # Local imports
 from popular.routes import router as popular_router
 
@@ -6,7 +7,7 @@ from popular.routes import router as popular_router
 app = FastAPI(
     title="NyNews",
     description="API du projet New-York Times du Bootcamp DE de février 2023",
-    version="1.0.1",
+    version="0.0.2",
     openapi_tags=[
         {"name": "Popular"},
     ],
