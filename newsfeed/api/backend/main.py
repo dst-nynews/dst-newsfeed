@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 # Local imports
 from popular.routes import router as popular_router
 

@@ -1,9 +1,8 @@
 import datetime as dt
 
 import streamlit as st
-
 # Local imports
-from .helpers import get_popular, make_clickable_article_title
+from helpers import get_popular, make_clickable_article_title
 
 # Page metadata
 st.set_page_config(
